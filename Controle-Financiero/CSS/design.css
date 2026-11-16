@@ -1,0 +1,1151 @@
+/* =================================
+   1. VARIÁVEIS
+================================= */
+
+:root {
+    --primary: #245B43;
+    --primary-hover: #1B4835;
+    --primary-light: #E3EFE6;
+
+    --background: #FFFFFF;
+    --surface: #F5F7F5;
+
+    --text-primary: #26332B;
+    --text-secondary: #718076;
+
+    --border: #E1E7E2;
+
+    --radius: 5px;
+}
+
+/* =================================
+   2. RESET
+================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'DM Sans', Arial, sans-serif;
+    background: var(--surface);
+    color: var(--text-primary);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    font: inherit;
+    cursor: pointer;
+    border: none;
+}
+
+/* =================================
+   3. DASHBOARD
+================================= */
+
+.dashboard {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* =================================
+   4. SIDEBAR
+================================= */
+
+.sidebar {
+    width: 255px;
+    background: var(--background);
+    border-right: 1px solid var(--border);
+
+    padding: 28px 20px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+/* LOGO */
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+
+    font-size: 21px;
+    font-weight: 800;
+    color: var(--primary);
+
+    margin-bottom: 48px;
+}
+
+.logo-icon {
+    width: 36px;
+    height: 36px;
+
+    background: var(--primary);
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 11px;
+}
+
+/* NAVEGAÇÃO */
+
+.nav-title {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+
+    color: var(--text-secondary);
+
+    margin-bottom: 15px;
+    padding-left: 12px;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+
+    padding: 12px;
+
+    border-radius: var(--radius);
+
+    color: var(--text-secondary);
+    font-size: 14px;
+    font-weight: 500;
+
+    transition: 0.2s ease;
+}
+
+.nav-link span {
+    width: 20px;
+    text-align: center;
+    font-size: 18px;
+}
+
+.nav-link:hover {
+    background: var(--surface);
+    color: var(--primary);
+}
+
+.nav-link.active {
+    background: var(--primary-light);
+    color: var(--primary);
+    font-weight: 700;
+}
+
+.secondary-title {
+    margin-top: 35px;
+}
+
+/* USUÁRIO DA SIDEBAR */
+
+.sidebar-footer {
+    margin-top: auto;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+}
+
+/* =================================
+   5. PERFIL
+================================= */
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--primary-light);
+    color: var(--primary);
+
+    border-radius: 50%;
+    font-weight: 700;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.user-info strong {
+    font-size: 13px;
+}
+
+.user-info span {
+    font-size: 11px;
+    color: var(--text-secondary);
+}
+
+/* =================================
+   6. CONTEÚDO PRINCIPAL
+================================= */
+
+.main-content {
+    flex: 1;
+    min-width: 0;
+    padding: 35px 40px;
+}
+
+/* =================================
+   7. HEADER
+================================= */
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+}
+
+.header-text h1 {
+    font-size: 25px;
+    font-weight: 800;
+}
+
+.header-text p {
+    margin-top: 5px;
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.notification-button {
+    width: 40px;
+    height: 40px;
+
+    background: var(--background);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+
+    color: var(--primary);
+    font-size: 20px;
+}
+
+.header-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* =================================
+   8. ÁREA DE CONTEÚDO
+================================= */
+
+.dashboard-content {
+    padding-top: 30px;
+}
+
+.welcome-card {
+    background: var(--primary);
+    color: white;
+
+    padding: 35px;
+    border-radius: 20px;
+
+    min-height: 190px;
+
+    display: flex;
+    align-items: center;
+}
+
+.welcome-card span {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    color: #C5D9CB;
+    font-weight: 600;
+}
+
+.welcome-card h2 {
+    font-size: 25px;
+    margin: 12px 0;
+    color: white;
+}
+
+.welcome-card p {
+    font-size: 14px;
+    color: #DCE9DF;
+}
+
+/* =================================
+   9. RESPONSIVIDADE
+================================= */
+
+@media (max-width: 850px) {
+
+    .sidebar {
+        width: 210px;
+    }
+
+    .main-content {
+        padding: 25px;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .dashboard {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        padding: 18px;
+    }
+
+    .logo {
+        margin-bottom: 20px;
+    }
+
+    .sidebar-footer {
+        display: none;
+    }
+
+    .main-content {
+        padding: 20px 16px;
+    }
+
+    .header {
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .header-profile {
+        display: none;
+    }
+
+    .welcome-card {
+        padding: 24px;
+    }
+
+}
+
+
+/* =================================
+   RESUMO FINANCEIRO
+================================= */
+
+.financial-section {
+    margin-top: 35px;
+}
+
+/* CABEÇALHO DA SEÇÃO */
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 22px;
+}
+
+.section-header h2 {
+    font-size: 20px;
+    color: var(--text-primary);
+}
+
+.section-header p {
+    font-size: 13px;
+    margin-top: 4px;
+    color: var(--text-secondary);
+}
+
+/* SELETOR DE PERÍODO */
+
+.period-select {
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: white;
+    color: var(--text-primary);
+    outline: none;
+    cursor: pointer;
+}
+
+/* GRID DOS CARTÕES */
+
+.financial-cards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+}
+
+/* CARTÕES */
+
+.financial-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 24px;
+    box-shadow: 0 3px 12px rgba(35, 144, 98, 0.03);
+    transition: 0.2s ease;
+}
+
+.financial-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(18, 61, 43, 0.07);
+}
+
+/* PRIMEIRO CARTÃO */
+
+.balance-card {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: white;
+}
+
+.balance-card h3 {
+    color: white;
+}
+
+/* CABEÇALHO DOS CARTÕES */
+
+.financial-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.balance-card .financial-card-header {
+    color: #DCE9DF;
+}
+
+/* ÍCONES */
+
+.card-icon {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 11px;
+    background: var(--primary-light);
+    color: var(--primary);
+
+    font-weight: 700;
+}
+
+.balance-card .card-icon {
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+}
+
+.income-icon {
+    color: #239c5c;
+}
+
+.expense-icon {
+    color: #D95353;
+}
+
+/* VALORES */
+
+.financial-card h3 {
+    font-size: 27px;
+    font-weight: 800;
+    margin-top: 20px;
+    color: var(--text-primary);
+}
+
+/* DESCRIÇÕES */
+
+.card-description {
+    display: block;
+    margin-top: 8px;
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.balance-card .card-description {
+    color: #DCE9DF;
+}
+
+.income-text {
+    color: #2cb16a;
+}
+
+.expense-text {
+    color: #D95353;
+}
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 900px) {
+    .financial-cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    .financial-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .section-header {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .financial-card {
+        padding: 20px;
+    }
+}
+
+.balance-card h3 {
+    color: #FFFFFF;
+}
+
+
+/* =================================
+   TRANSAÇÕES RECENTES
+================================= */
+
+.transactions-section {
+    margin-top: 38px;
+    margin-bottom: 40px;
+}
+
+/* BOTÃO VER TODAS */
+
+.view-all-button {
+    background: transparent;
+    color: var(--primary);
+    font-size: 13px;
+    font-weight: 700;
+    padding: 10px;
+    transition: 0.2s ease;
+}
+
+.view-all-button:hover {
+    opacity: 0.7;
+}
+
+/* CARD DE TRANSAÇÕES */
+
+.transactions-card {
+    background: var(--background);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 8px 24px;
+}
+
+/* ITEM */
+
+.transaction-item {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 120px 140px;
+    align-items: center;
+    gap: 15px;
+
+    padding: 19px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.transaction-item:last-child {
+    border-bottom: none;
+}
+
+/* INFORMAÇÕES */
+
+.transaction-info {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 0;
+}
+
+.transaction-info h3 {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.transaction-info span {
+    display: block;
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 3px;
+}
+
+/* ÍCONES */
+
+.transaction-icon {
+    width: 43px;
+    height: 43px;
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 13px;
+    font-size: 19px;
+}
+
+.food {
+    background: #FFF0E4;
+}
+
+.income {
+    background: var(--primary-light);
+    color: var(--primary);
+    font-weight: 700;
+}
+
+.transport {
+    background: #EEF0F8;
+}
+
+.education {
+    background: #F5EFFB;
+}
+
+/* DATA */
+
+.transaction-date {
+    color: var(--text-secondary);
+    font-size: 12px;
+}
+
+/* VALORES */
+
+.transaction-value {
+    text-align: right;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.expense {
+    color: #D95353;
+}
+
+.positive {
+    color: var(--primary);
+}
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 750px) {
+
+    .transactions-card {
+        padding: 8px 15px;
+    }
+
+    .transaction-item {
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 8px;
+    }
+
+    .transaction-date {
+        display: none;
+    }
+
+    .transaction-value {
+        font-size: 12px;
+    }
+
+}
+
+
+/* =================================
+   ANÁLISE DE DESPESAS
+================================= */
+
+.expenses-section {
+    margin-top: 38px;
+    margin-bottom: 40px;
+}
+
+/* CARTÃO PRINCIPAL */
+
+.expenses-card {
+    display: grid;
+    grid-template-columns: 0.8fr 1.5fr;
+    gap: 40px;
+
+    padding: 30px;
+
+    background: var(--background);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+
+    box-shadow: 0 3px 12px rgba(18, 61, 43, 0.03);
+}
+
+/* RESUMO */
+
+.expenses-summary {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    padding-right: 25px;
+    border-right: 1px solid var(--border);
+}
+
+.expenses-summary span {
+    color: var(--text-secondary);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.expenses-summary h3 {
+    color: var(--primary);
+    font-size: 30px;
+    margin-top: 12px;
+}
+
+.expenses-summary p {
+    font-size: 12px;
+    margin-top: 8px;
+    color: var(--text-secondary);
+}
+
+/* PERÍODO */
+
+.expense-period {
+    background: var(--primary-light);
+    color: var(--primary);
+    padding: 8px 14px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* LISTA DE CATEGORIAS */
+
+.expense-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.expense-category {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+/* NOME E VALOR */
+
+.category-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+.category-name {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    color: var(--text-primary);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.category-info strong {
+    color: var(--text-primary);
+    font-size: 13px;
+}
+
+/* INDICADORES */
+
+.category-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.food-dot {
+    background: #245B43;
+}
+
+.transport-dot {
+    background: #6E9B7D;
+}
+
+.housing-dot {
+    background: #A6C4AC;
+}
+
+.education-dot {
+    background: #B8A58A;
+}
+
+.leisure-dot {
+    background: #D4C6A8;
+}
+
+/* BARRAS DE PROGRESSO */
+
+.progress-track {
+    width: 100%;
+    height: 9px;
+
+    background: var(--surface);
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    border-radius: 20px;
+    transition: width 0.5s ease;
+}
+
+.food-fill {
+    background: #245B43;
+}
+
+.transport-fill {
+    background: #6E9B7D;
+}
+
+.housing-fill {
+    background: #A6C4AC;
+}
+
+.education-fill {
+    background: #B8A58A;
+}
+
+.leisure-fill {
+    background: #D4C6A8;
+}
+
+/* PERCENTUAIS */
+
+.category-percentage {
+    font-size: 11px;
+    color: var(--text-secondary);
+}
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 900px) {
+
+    .expenses-card {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .expenses-summary {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        padding-right: 0;
+        padding-bottom: 20px;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .expenses-card {
+        padding: 20px;
+    }
+
+    .expenses-summary h3 {
+        font-size: 26px;
+    }
+
+}
+
+
+/* =================================
+   FORMULÁRIO DE MOVIMENTAÇÕES
+================================= */
+
+.form-section {
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.transaction-form {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 28px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: white;
+    color: var(--text-primary);
+    outline: none;
+    transition: 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(36, 91, 67, 0.08);
+}
+
+.submit-button {
+    grid-column: 1 / -1;
+    padding: 14px;
+    border-radius: 11px;
+
+    background: var(--primary);
+    color: white;
+
+    font-weight: 700;
+    transition: 0.2s;
+}
+
+.submit-button:hover {
+    background: var(--primary-hover);
+}
+
+@media (max-width: 600px) {
+    .transaction-form {
+        grid-template-columns: 1fr;
+        padding: 20px;
+    }
+}
+
+
+/* =================================
+   NOVO DESIGN - RETANGULAR
+================================= */
+
+/* BOTÕES */
+
+button,
+.submit-button,
+.view-all-button {
+    border-radius: 5px;
+    transition: all 0.2s ease;
+}
+
+/* BOTÃO PRINCIPAL */
+
+.submit-button {
+    background: var(--primary);
+    color: white;
+    border: 1px solid var(--primary);
+    padding: 14px 20px;
+    font-weight: 600;
+}
+
+.submit-button:hover {
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+}
+
+/* BOTÃO SECUNDÁRIO */
+
+.view-all-button {
+    border: 1px solid var(--border);
+    background: white;
+    color: var(--primary);
+    padding: 10px 16px;
+}
+
+.view-all-button:hover {
+    background: var(--primary-light);
+    border-color: var(--primary);
+}
+
+/* NOTIFICAÇÕES */
+
+.notification-button {
+    border-radius: 5px;
+}
+
+/* CAMPOS DE FORMULÁRIO */
+
+.form-group input,
+.form-group select,
+.period-select {
+    border-radius: 5px;
+    border: 1px solid var(--border);
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(36, 91, 67, 0.10);
+}
+
+/* NAVEGAÇÃO */
+
+.nav-link {
+    border-radius: 5px;
+    transition: background 0.2s ease;
+}
+
+/* CARTÕES */
+
+.financial-card,
+.transactions-card,
+.expenses-card,
+.transaction-form {
+    border-radius: 8px;
+}
+
+/* ÍCONES */
+
+.card-icon,
+.transaction-icon,
+.logo-icon,
+.user-avatar {
+    border-radius: 6px;
+}
+
+/* BANNER */
+
+.welcome-card {
+    border-radius: 8px;
+}
+
+
+/* ESTADOS DE INTERAÇÃO */
+
+button:active {
+    transform: scale(0.98);
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 3px;
+}
+
+/* TRANSIÇÕES DOS LINKS */
+
+.nav-link:hover {
+    padding-left: 16px;
+}
+
+/* TRANSIÇÃO DOS CARTÕES */
+
+.financial-card,
+.transactions-card,
+.expenses-card {
+    transition: border-color 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+.financial-card:hover,
+.transactions-card:hover,
+.expenses-card:hover {
+    border-color: #C4D5C8;
+}
+
+
+/* =================================
+   NAVEGAÇÃO E SEÇÕES
+================================= */
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.nav-link {
+    display: block;
+    padding: 12px 15px;
+    border-radius: 5px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: 0.2s ease;
+}
+
+.nav-link:hover {
+    background: var(--primary-light);
+    color: var(--primary);
+}
+
+.nav-link.active {
+    background: var(--primary-light);
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.dashboard-content,
+.transactions-section,
+.expenses-section,
+.form-section,
+.placeholder-section {
+    scroll-margin-top: 25px;
+}
+
+.placeholder-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 25px;
+    margin-top: 25px;
+}
+
+.placeholder-section h2 {
+    color: var(--text-primary);
+    margin-bottom: 10px;
+}
+
+.placeholder-section p {
+    color: var(--text-secondary);
+}
