@@ -1,7 +1,7 @@
 
-// =====================================
-// 1. SELECIONAR ELEMENTOS HTML
-// =====================================
+// ==========================================
+// 1. ELEMENTOS HTML
+// ==========================================
 
 const form = document.getElementById("transaction-form");
 
@@ -11,26 +11,24 @@ const categoryInput = document.getElementById("transaction-category");
 const amountInput = document.getElementById("transaction-amount");
 const dateInput = document.getElementById("transaction-date");
 
-const balanceElement = document.getElementById("balance-value");
-const incomeElement = document.getElementById("income-value");
-const expenseElement = document.getElementById("expense-value");
+const balanceValue = document.getElementById("balance-value");
+const incomeValue = document.getElementById("income-value");
+const expenseValue = document.getElementById("expense-value");
 
 const transactionsList = document.querySelector(".transactions-card");
 
 const monthFilter = document.getElementById("period-month");
 const yearFilter = document.getElementById("period-year");
 
-
-// =====================================
-// 2. CONFIGURAÇÃO DO ARMAZENAMENTO
-// =====================================
-
 const STORAGE_KEY = "fincontrol_dados";
+
+
+// ==========================================
+// 2. DADOS INICIAIS E LOCALSTORAGE
+// ==========================================
 
 const initialData = {
     openingBalance: 2450,
-    initialIncome: 3000,
-    initialExpense: 550,
     transactions: []
 };
 
@@ -38,82 +36,79 @@ function loadData() {
     try {
         const savedData = localStorage.getItem(STORAGE_KEY);
 
-        if (savedData) {
-            const data = JSON.parse(savedData);
-
-            if (Array.isArray(data.transactions)) {
-
-                // Compatibilidade com dados da versão anterior
-                if (
-                    typeof data.openingBalance !== "number" ||
-                    typeof data.initialIncome !== "number" ||
-                    typeof data.initialExpense !== "number"
-                ) {
-                    const transactionIncome = data.transactions
-                        .filter(t => t.type === "income")
-                        .reduce((total, t) => total + Number(t.amount), 0);
-
-                    const transactionExpense = data.transactions
-                        .filter(t => t.type === "expense")
-                        .reduce((total, t) => total + Number(t.amount), 0);
-
-                    const oldIncome = Number(data.income) || 3000;
-                    const oldExpense = Number(data.expense) || 550;
-                    const oldBalance = Number(data.balance) || 2450;
-
-                    return {
-                        openingBalance:
-                            oldBalance - transactionIncome + transactionExpense,
-
-                        initialIncome: oldIncome - transactionIncome,
-                        initialExpense: oldExpense - transactionExpense,
-
-                        transactions: data.transactions
-                    };
-                }
-
-                return data;
-            }
+        if (!savedData) {
+            return {
+                ...initialData,
+                transactions: []
+            };
         }
 
-    } catch (error) {
-        console.error("Erro ao carregar dados:", error);
-    }
+        const data = JSON.parse(savedData);
 
-    return {
-        ...initialData,
-        transactions: []
-    };
+        const transactions = Array.isArray(data.transactions)
+            ? data.transactions.filter(transaction =>
+                transaction &&
+                (transaction.type === "income" || transaction.type === "expense") &&
+                Number.isFinite(Number(transaction.amount)) &&
+                transaction.date
+            ).map(transaction => ({
+                ...transaction,
+                amount: Number(transaction.amount)
+            }))
+            : [];
+
+        // Compatibilidade com a estrutura antiga
+        if (Number.isFinite(Number(data.openingBalance))) {
+            return {
+                openingBalance: Number(data.openingBalance),
+                transactions
+            };
+        }
+
+        const transactionBalance = transactions.reduce((total, transaction) => {
+            return total + (
+                transaction.type === "income"
+                    ? transaction.amount
+                    : -transaction.amount
+            );
+        }, 0);
+
+        const oldBalance = Number.isFinite(Number(data.balance))
+            ? Number(data.balance)
+            : initialData.openingBalance;
+
+        return {
+            openingBalance: oldBalance - transactionBalance,
+            transactions
+        };
+
+    } catch (error) {
+        console.error("Erro ao carregar os dados:", error);
+
+        return {
+            ...initialData,
+            transactions: []
+        };
+    }
 }
 
 let financialData = loadData();
 
-
-// =====================================
-// 3. SALVAR DADOS
-// =====================================
-
 function saveData() {
     try {
-        localStorage.setItem(
-            STORAGE_KEY,
-            JSON.stringify(financialData)
-        );
-
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(financialData));
         return true;
-
     } catch (error) {
-        console.error("Erro ao salvar dados:", error);
-        alert("Não foi possível salvar os dados no navegador.");
-
+        console.error("Erro ao salvar os dados:", error);
+        alert("Não foi possível salvar os dados.");
         return false;
     }
 }
 
 
-// =====================================
-// 4. FORMATAR VALORES
-// =====================================
+// ==========================================
+// 3. FORMATAÇÃO DE VALORES
+// ==========================================
 
 function formatCurrency(value) {
     return Number(value).toLocaleString("pt-BR", {
@@ -123,9 +118,9 @@ function formatCurrency(value) {
 }
 
 
-// =====================================
-// 5. CONFIGURAR FILTROS
-// =====================================
+// ==========================================
+// 4. CONFIGURAÇÃO DO FILTRO DE ANO
+// ==========================================
 
 function setupYearFilter() {
     if (!yearFilter) return;
@@ -134,156 +129,119 @@ function setupYearFilter() {
 
     const years = new Set();
 
-    // Anos das transações cadastradas
-    financialData.transactions.forEach(transaction => {
-        if (transaction.date) {
-            years.add(Number(transaction.date.substring(0, 4)));
-        }
-    });
-
-    // Ano atual e alguns anos próximos
     for (let year = currentYear - 5; year <= currentYear + 1; year++) {
         years.add(year);
     }
 
-    const selectedYear = yearFilter.value;
+    financialData.transactions.forEach(transaction => {
+        const year = Number(transaction.date.slice(0, 4));
+
+        if (Number.isInteger(year)) {
+            years.add(year);
+        }
+    });
+
+    const selectedYear = yearFilter.value || String(currentYear);
 
     yearFilter.innerHTML = "";
 
     [...years].sort((a, b) => b - a).forEach(year => {
         const option = document.createElement("option");
 
-        option.value = year;
-        option.textContent = year;
+        option.value = String(year);
+        option.textContent = String(year);
 
         yearFilter.appendChild(option);
     });
 
-    if (years.has(Number(selectedYear))) {
-        yearFilter.value = selectedYear;
-    } else {
-        yearFilter.value = currentYear;
-    }
+    yearFilter.value = years.has(Number(selectedYear))
+        ? selectedYear
+        : String(currentYear);
 }
 
 
-// =====================================
-// 6. FILTRAR TRANSAÇÕES
-// =====================================
+// ==========================================
+// 5. FILTRAR TRANSAÇÕES
+// ==========================================
 
 function getFilteredTransactions() {
-    let transactions = [...financialData.transactions];
+    const selectedMonth = monthFilter?.value || "all";
+    const selectedYear = yearFilter?.value || String(new Date().getFullYear());
 
-    const selectedMonth = monthFilter
-        ? monthFilter.value
-        : "all";
+    return financialData.transactions.filter(transaction => {
+        const transactionYear = transaction.date.slice(0, 4);
+        const transactionMonth = transaction.date.slice(5, 7);
 
-    const selectedYear = yearFilter
-        ? Number(yearFilter.value)
-        : null;
+        const matchesYear = transactionYear === selectedYear;
+        const matchesMonth =
+            selectedMonth === "all" || transactionMonth === selectedMonth;
 
-    if (selectedYear) {
-        transactions = transactions.filter(transaction => {
-            return Number(transaction.date.substring(0, 4)) === selectedYear;
-        });
-    }
-
-    if (selectedMonth !== "all") {
-        transactions = transactions.filter(transaction => {
-            return transaction.date.substring(5, 7) === selectedMonth;
-        });
-    }
-
-    return transactions;
+        return matchesYear && matchesMonth;
+    });
 }
 
 
-// =====================================
-// 7. ATUALIZAR DASHBOARD
-// =====================================
+// ==========================================
+// 6. CALCULAR RESUMO FINANCEIRO
+// ==========================================
 
 function updateDashboard() {
-    const selectedTransactions = getFilteredTransactions();
+    const selectedMonth = monthFilter?.value || "all";
+    const selectedYear = Number(
+        yearFilter?.value || new Date().getFullYear()
+    );
 
-    const selectedMonth = monthFilter
-        ? monthFilter.value
-        : "all";
-
-    const selectedYear = yearFilter
-        ? Number(yearFilter.value)
-        : null;
+    const filteredTransactions = getFilteredTransactions();
 
     let income = 0;
     let expense = 0;
+
+    filteredTransactions.forEach(transaction => {
+        if (transaction.type === "income") {
+            income += transaction.amount;
+        } else {
+            expense += transaction.amount;
+        }
+    });
+
+    // Saldo acumulado até o fim do período selecionado
+    const cutoffDate = selectedMonth === "all"
+        ? `${selectedYear}-12-31`
+        : new Date(selectedYear, Number(selectedMonth), 0)
+            .toISOString()
+            .slice(0, 10);
+
+    const accumulatedTransactions = financialData.transactions.filter(
+        transaction => transaction.date <= cutoffDate
+    );
+
     let balance = financialData.openingBalance;
 
-    // Soma todas as transações até o período selecionado
-    financialData.transactions.forEach(transaction => {
-        const transactionYear = Number(transaction.date.substring(0, 4));
-        const transactionMonth = Number(transaction.date.substring(5, 7));
-
-        const isBeforeOrInSelectedPeriod =
-            !selectedYear ||
-            transactionYear < selectedYear ||
-            (
-                transactionYear === selectedYear &&
-                (
-                    selectedMonth === "all" ||
-                    transactionMonth <= Number(selectedMonth)
-                )
-            );
-
-        if (isBeforeOrInSelectedPeriod) {
-            if (transaction.type === "income") {
-                balance += Number(transaction.amount);
-            } else {
-                balance -= Number(transaction.amount);
-            }
-        }
-    });
-
-    // Calcula receitas e despesas do período filtrado
-    income = financialData.initialIncome;
-    expense = financialData.initialExpense;
-
-    if (selectedMonth === "all" && selectedYear) {
-        // Mostra o histórico total daquele ano, sem incluir os valores iniciais
-        income = 0;
-        expense = 0;
-    }
-
-    selectedTransactions.forEach(transaction => {
+    accumulatedTransactions.forEach(transaction => {
         if (transaction.type === "income") {
-            income += Number(transaction.amount);
+            balance += transaction.amount;
         } else {
-            expense += Number(transaction.amount);
+            balance -= transaction.amount;
         }
     });
 
-    // Valores iniciais representam um histórico sem data específica.
-    // Eles só entram na visualização geral.
-    if (selectedYear && selectedMonth !== "all") {
-        income = 0;
-        expense = 0;
-
-        selectedTransactions.forEach(transaction => {
-            if (transaction.type === "income") {
-                income += Number(transaction.amount);
-            } else {
-                expense += Number(transaction.amount);
-            }
-        });
+    if (balanceValue) {
+        balanceValue.textContent = formatCurrency(balance);
     }
 
-    balanceElement.textContent = formatCurrency(balance);
-    incomeElement.textContent = formatCurrency(income);
-    expenseElement.textContent = formatCurrency(expense);
+    if (incomeValue) {
+        incomeValue.textContent = formatCurrency(income);
+    }
+
+    if (expenseValue) {
+        expenseValue.textContent = formatCurrency(expense);
+    }
 }
 
 
-// =====================================
-// 8. CRIAR ELEMENTO DE TRANSAÇÃO
-// =====================================
+// ==========================================
+// 7. CRIAR ELEMENTO DE TRANSAÇÃO
+// ==========================================
 
 function createTransactionElement(transaction) {
     const item = document.createElement("div");
@@ -292,89 +250,80 @@ function createTransactionElement(transaction) {
     const info = document.createElement("div");
     info.classList.add("transaction-info");
 
-    const icon = document.createElement("div");
-    icon.classList.add("transaction-icon");
-
-    const details = document.createElement("div");
-
-    const title = document.createElement("h3");
+    const title = document.createElement("h4");
     title.textContent = transaction.name;
 
-    const category = document.createElement("span");
-    category.textContent = transaction.category;
+    const details = document.createElement("p");
 
-    const dateElement = document.createElement("div");
-    dateElement.classList.add("transaction-date");
+    const date = transaction.date.split("-").reverse().join("/");
 
-    dateElement.textContent = new Date(
-        transaction.date + "T12:00:00"
-    ).toLocaleDateString("pt-BR");
+    details.textContent = `${transaction.category} • ${date}`;
 
-    const value = document.createElement("div");
-    value.classList.add("transaction-value");
-
-    if (transaction.type === "income") {
-        icon.textContent = "↗";
-        icon.classList.add("income");
-
-        value.textContent = "+ " + formatCurrency(transaction.amount);
-        value.classList.add("positive");
-
-    } else {
-        icon.textContent = "↙";
-
-        value.textContent = "- " + formatCurrency(transaction.amount);
-        value.classList.add("expense");
-    }
-
-    details.appendChild(title);
-    details.appendChild(category);
-
-    info.appendChild(icon);
+    info.appendChild(title);
     info.appendChild(details);
 
+    const amount = document.createElement("span");
+    amount.classList.add("transaction-amount");
+
+    if (transaction.type === "income") {
+        amount.textContent = `+ ${formatCurrency(transaction.amount)}`;
+        amount.classList.add("income");
+    } else {
+        amount.textContent = `- ${formatCurrency(transaction.amount)}`;
+        amount.classList.add("expense");
+    }
+
     item.appendChild(info);
-    item.appendChild(dateElement);
-    item.appendChild(value);
+    item.appendChild(amount);
 
     return item;
 }
 
 
-// =====================================
-// 9. EXIBIR TRANSAÇÕES
-// =====================================
+// ==========================================
+// 8. MOSTRAR TRANSAÇÕES NA TELA
+// ==========================================
 
 function renderTransactions() {
     if (!transactionsList) return;
 
-    // Remove os itens anteriores
-    transactionsList
-        .querySelectorAll(".transaction-item")
-        .forEach(item => item.remove());
+    // Remove os exemplos estáticos do HTML e a lista anterior
+    transactionsList.querySelectorAll(
+        ".transaction-item, .empty-message"
+    ).forEach(element => element.remove());
 
-    const selectedTransactions = getFilteredTransactions();
+    const transactions = getFilteredTransactions();
 
-    if (selectedTransactions.length === 0) {
+    // Mais recentes primeiro
+    transactions.sort((a, b) => {
+        if (a.date !== b.date) {
+            return b.date.localeCompare(a.date);
+        }
+
+        return Number(b.id || 0) - Number(a.id || 0);
+    });
+
+    if (transactions.length === 0) {
         const emptyMessage = document.createElement("p");
 
         emptyMessage.classList.add("empty-message");
-        emptyMessage.textContent = "Nenhuma movimentação neste período.";
+        emptyMessage.textContent = "Nenhuma transação encontrada neste período.";
 
         transactionsList.appendChild(emptyMessage);
         return;
     }
 
-    selectedTransactions.reverse().forEach(transaction => {
-        const element = createTransactionElement(transaction);
-        transactionsList.appendChild(element);
+    transactions.forEach(transaction => {
+        transactionsList.appendChild(
+            createTransactionElement(transaction)
+        );
     });
 }
 
 
-// =====================================
-// 10. ATUALIZAR TODA A INTERFACE
-// =====================================
+// ==========================================
+// 9. ATUALIZAR TODA A DASHBOARD
+// ==========================================
 
 function refreshDashboard() {
     updateDashboard();
@@ -382,9 +331,9 @@ function refreshDashboard() {
 }
 
 
-// =====================================
-// 11. CADASTRAR MOVIMENTAÇÃO
-// =====================================
+// ==========================================
+// 10. CADASTRAR NOVA TRANSAÇÃO
+// ==========================================
 
 if (form) {
     form.addEventListener("submit", function(event) {
@@ -396,23 +345,23 @@ if (form) {
         const amount = Number(amountInput.value);
         const date = dateInput.value;
 
-        if (
-            !name ||
-            !date ||
-            !Number.isFinite(amount) ||
-            amount <= 0
-        ) {
+        if (!name || !date || !Number.isFinite(amount) || amount <= 0) {
             alert("Preencha todos os campos corretamente.");
+            return;
+        }
+
+        if (type !== "income" && type !== "expense") {
+            alert("Selecione um tipo de transação válido.");
             return;
         }
 
         const transaction = {
             id: Date.now(),
-            type: type,
-            name: name,
-            category: category,
-            amount: amount,
-            date: date
+            type,
+            name,
+            category,
+            amount,
+            date
         };
 
         financialData.transactions.push(transaction);
@@ -422,19 +371,35 @@ if (form) {
             return;
         }
 
-        setupYearFilter();
+        // Atualiza o filtro de ano caso seja um ano novo
+        const transactionYear = date.slice(0, 4);
+        const availableYears = [...yearFilter.options].map(option => option.value);
+
+        if (yearFilter && !availableYears.includes(transactionYear)) {
+            setupYearFilter();
+        }
+
+        // Mostra o período da nova transação
+        if (yearFilter) {
+            yearFilter.value = transactionYear;
+        }
+
+        if (monthFilter) {
+            monthFilter.value = date.slice(5, 7);
+        }
+
         refreshDashboard();
 
         form.reset();
 
-        alert("Movimentação cadastrada com sucesso!");
+        alert("Transação cadastrada com sucesso!");
     });
 }
 
 
-// =====================================
-// 12. EVENTOS DOS FILTROS
-// =====================================
+// ==========================================
+// 11. EVENTOS DOS FILTROS
+// ==========================================
 
 if (monthFilter) {
     monthFilter.addEventListener("change", refreshDashboard);
@@ -445,38 +410,29 @@ if (yearFilter) {
 }
 
 
-// =====================================
-// 13. NAVEGAÇÃO DA BARRA LATERAL
-// =====================================
+// ==========================================
+// 12. NAVEGAÇÃO LATERAL
+// ==========================================
 
 const navLinks = document.querySelectorAll(".nav-link");
 
 navLinks.forEach(link => {
-    link.addEventListener("click", function(event) {
-        const targetId = this.getAttribute("href").substring(1);
-        const targetSection = document.getElementById(targetId);
-
-        if (!targetSection) return;
-
-        event.preventDefault();
-
-        navLinks.forEach(item => {
-            item.classList.remove("active");
-        });
+    link.addEventListener("click", function() {
+        navLinks.forEach(item => item.classList.remove("active"));
 
         this.classList.add("active");
-
-        targetSection.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-        });
     });
 });
 
 
-// =====================================
-// 14. INICIALIZAR DASHBOARD
-// =====================================
+// ==========================================
+// 13. INICIALIZAÇÃO
+// ==========================================
 
 setupYearFilter();
+
+if (dateInput) {
+    dateInput.value = new Date().toISOString().slice(0, 10);
+}
+
 refreshDashboard();
