@@ -141,20 +141,28 @@
 
 <div class="financial-section">
 
-    <div class="section-header">
-        <div>
-            <h2>Resumo financeiro</h2>
-            <p>Acompanhe sua movimentação financeira.</p>
-        </div>
-
-        <select class="period-select">
-            <option>Este mês</option>
-            <option>Mês passado</option>
-            <option>Últimos 3 meses</option>
+    
+    <div class="period-filters">
+        <select id="period-month" class="period-select">
+        <option value="all">Todos os meses</option>
+        <option value="01">Janeiro</option>
+        <option value="02">Fevereiro</option>
+        <option value="03">Março</option>
+        <option value="04">Abril</option>
+        <option value="05">Maio</option>
+        <option value="06">Junho</option>
+        <option value="07">Julho</option>
+        <option value="08">Agosto</option>
+        <option value="09">Setembro</option>
+        <option value="10">Outubro</option>
+        <option value="11">Novembro</option>
+        <option value="12">Dezembro</option>
+        </select>
+    
+        <select id="period-year" class="period-select">
         </select>
     </div>
 
-    <div class="financial-cards">
 
         <!-- SALDO -->
 
