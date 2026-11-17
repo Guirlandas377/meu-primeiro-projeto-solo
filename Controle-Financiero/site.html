@@ -6,557 +6,502 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Controle Financeiro</title>
+    <title>FinControl - Controle Financeiro</title>
 
     <link rel="stylesheet" href="CSS/design.css">
 </head>
 
 <body>
 
-    <div class="dashboard">
+<div class="dashboard">
 
-        <!-- MENU LATERAL -->
-        <aside class="sidebar">
+    <!-- MENU LATERAL -->
+    <aside class="sidebar">
 
-            <div class="logo">
-                <span class="logo-icon">F</span>
-                <span>FinControl</span>
+        <div class="logo">
+            <span class="logo-icon">F</span>
+            <span>FinControl</span>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <p class="nav-title">MENU PRINCIPAL</p>
+
+            <a href="#visao-geral" class="nav-link active">
+                <span>▦</span>
+                Visão geral
+            </a>
+
+            <a href="#receitas" class="nav-link">
+                <span>↗</span>
+                Receitas
+            </a>
+
+            <a href="#despesas" class="nav-link">
+                <span>↙</span>
+                Despesas
+            </a>
+
+            <a href="#transacoes" class="nav-link">
+                <span>▤</span>
+                Transações
+            </a>
+
+            <a href="#relatorios" class="nav-link">
+                <span>▥</span>
+                Relatórios
+            </a>
+
+            <p class="nav-title secondary-title">PREFERÊNCIAS</p>
+
+            <a href="#configuracoes" class="nav-link">
+                <span>⚙</span>
+                Configurações
+            </a>
+
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="user-avatar">G</div>
+
+            <div class="user-info">
+                <strong>Guilherme</strong>
+                <span>Minha conta</span>
+            </div>
+        </div>
+
+    </aside>
+
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="main-content">
+
+        <!-- CABEÇALHO -->
+        <header class="header">
+
+            <div class="header-text">
+                <h1>Visão geral</h1>
+                <p>Bem-vindo de volta! Aqui está seu resumo financeiro.</p>
             </div>
 
-            <nav class="sidebar-nav">
+            <div class="header-actions">
 
-                <p class="nav-title">MENU PRINCIPAL</p>
+                <button class="notification-button">
+                    ♧
+                </button>
 
-                <a href="#" class="nav-link active">
-                    <span>▦</span>
-                    Visão geral
-                </a>
+                <div class="header-profile">
+                    <div class="user-avatar">G</div>
 
-                <a href="#" class="nav-link">
-                    <span>↗</span>
-                    Receitas
-                </a>
+                    <div class="user-info">
+                        <strong>Guilherme</strong>
+                        <span>Estudante</span>
+                    </div>
+                </div>
 
-                <a href="#" class="nav-link">
-                    <span>↙</span>
-                    Despesas
-                </a>
+            </div>
 
-                <a href="#" class="nav-link">
-                    <span>▤</span>
-                    Transações
-                </a>
+        </header>
 
-                <a href="#" class="nav-link">
-                    <span>▥</span>
-                    Relatórios
-                </a>
 
-                <p class="nav-title secondary-title">PREFERÊNCIAS</p>
+        <!-- VISÃO GERAL -->
+        <section id="visao-geral" class="dashboard-content">
 
-                <a href="#" class="nav-link">
-                    <span>⚙</span>
-                    Configurações
-                </a>
-
-            </nav>
-
-            <div class="sidebar-footer">
-                <div class="user-avatar">G</div>
-
-                <div class="user-info">
-                    <strong>Guilherme</strong>
-                    <span>Minha conta</span>
+            <div class="welcome-card">
+                <div>
+                    <span>SEU PAINEL FINANCEIRO</span>
+                    <h2>Organize seu dinheiro com inteligência.</h2>
+                    <p>Acompanhe suas finanças e tenha mais controle sobre seu futuro.</p>
                 </div>
             </div>
 
-        </aside>
 
-        <!-- CONTEÚDO PRINCIPAL -->
-        <main class="main-content">
-            
-            <section id="relatorios" class="placeholder-section">
-                <h2>Relatórios</h2>
-                <p>Seus relatórios financeiros aparecerão aqui.</p>
-            </section>
+            <!-- RESUMO FINANCEIRO -->
+            <div class="financial-section">
 
-            <section id="configuracoes" class="placeholder-section">
-                <h2>Configurações</h2>
-                <p>As configurações da sua conta aparecerão aqui.</p>
-            </section>
+                <div class="period-filters">
 
+                    <select id="period-month" class="period-select">
+                        <option value="all">Todos os meses</option>
+                        <option value="01">Janeiro</option>
+                        <option value="02">Fevereiro</option>
+                        <option value="03">Março</option>
+                        <option value="04">Abril</option>
+                        <option value="05">Maio</option>
+                        <option value="06">Junho</option>
+                        <option value="07">Julho</option>
+                        <option value="08">Agosto</option>
+                        <option value="09">Setembro</option>
+                        <option value="10">Outubro</option>
+                        <option value="11">Novembro</option>
+                        <option value="12">Dezembro</option>
+                    </select>
 
-            <!-- CABEÇALHO -->
-            <header class="header">
+                    <select id="period-year" class="period-select">
+                    </select>
 
-                <div class="header-text">
-                    <h1>Visão geral</h1>
-                    <section id="visao-geral" class="dashboard-content"></section>
-                    <p>Bem-vindo de volta! Aqui está seu resumo financeiro.</p>
                 </div>
 
-                <div class="header-actions">
 
-                    <button class="notification-button">
-                        ♧
-                    </button>
+                <!-- SALDO -->
+                <div class="financial-card balance-card">
 
-                    <div class="header-profile">
-                        <div class="user-avatar">G</div>
+                    <div class="financial-card-header">
+                        <span>Saldo disponível</span>
+                        <span class="card-icon">R$</span>
+                    </div>
 
-                        <div class="user-info">
-                            <strong>Guilherme</strong>
-                            <span>Estudante</span>
+                    <h3 id="balance-value">R$ 2.450,00</h3>
+
+                    <span class="card-description">
+                        Seu saldo atual
+                    </span>
+
+                </div>
+
+
+                <!-- RECEITAS -->
+                <div class="financial-card">
+
+                    <div class="financial-card-header">
+                        <span>Receitas</span>
+                        <span class="card-icon income-icon">↗</span>
+                    </div>
+
+                    <h3 id="income-value">R$ 3.000,00</h3>
+
+                    <span class="card-description income-text">
+                        ↑ Entradas do período
+                    </span>
+
+                </div>
+
+
+                <!-- DESPESAS -->
+                <div class="financial-card">
+
+                    <div class="financial-card-header">
+                        <span>Despesas</span>
+                        <span class="card-icon expense-icon">↙</span>
+                    </div>
+
+                    <h3 id="expense-value">R$ 550,00</h3>
+
+                    <span class="card-description expense-text">
+                        ↓ Saídas do período
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- TRANSAÇÕES RECENTES -->
+        <section id="transacoes" class="transactions-section">
+
+            <div class="section-header">
+
+                <div>
+                    <h2>Transações recentes</h2>
+                    <p>Acompanhe suas últimas movimentações.</p>
+                </div>
+
+                <button class="view-all-button">
+                    Ver todas →
+                </button>
+
+            </div>
+
+            <div class="transactions-card">
+
+                <!-- TRANSAÇÕES CADASTRADAS PELO JAVASCRIPT -->
+
+                <div class="transaction-item">
+                    <div class="transaction-info">
+                        <div class="transaction-icon food">🍔</div>
+                        <div>
+                            <h3>Alimentação</h3>
+                            <span>Restaurante universitário</span>
                         </div>
                     </div>
 
-                </div>
+                    <div class="transaction-date">Hoje</div>
 
-            </header>
-
-            <!-- ÁREA DE CONTEÚDO -->
-            <section class="dashboard-content">
-
-                <div class="welcome-card">
-                    <div>
-                        <span>SEU PAINEL FINANCEIRO</span>
-                        <h2>Organize seu dinheiro com inteligência.</h2>
-                        <p>Acompanhe suas finanças e tenha mais controle sobre seu futuro.</p>
+                    <div class="transaction-value expense">
+                        - R$ 35,00
                     </div>
                 </div>
 
-            </section>
+                <div class="transaction-item">
+                    <div class="transaction-info">
+                        <div class="transaction-icon income">↗</div>
+                        <div>
+                            <h3>Bolsa universitária</h3>
+                            <span>Receita</span>
+                        </div>
+                    </div>
 
-        </main>
+                    <div class="transaction-date">14 Nov, 2026</div>
 
-    </div>
+                    <div class="transaction-value positive">
+                        + R$ 800,00
+                    </div>
+                </div>
+
+                <div class="transaction-item">
+                    <div class="transaction-info">
+                        <div class="transaction-icon transport">🚗</div>
+                        <div>
+                            <h3>Transporte</h3>
+                            <span>Aplicativo de transporte</span>
+                        </div>
+                    </div>
+
+                    <div class="transaction-date">13 Nov, 2026</div>
+
+                    <div class="transaction-value expense">
+                        - R$ 22,50
+                    </div>
+                </div>
+
+                <div class="transaction-item">
+                    <div class="transaction-info">
+                        <div class="transaction-icon education">📚</div>
+                        <div>
+                            <h3>Material acadêmico</h3>
+                            <span>Educação</span>
+                        </div>
+                    </div>
+
+                    <div class="transaction-date">12 Nov, 2026</div>
+
+                    <div class="transaction-value expense">
+                        - R$ 65,00
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ANÁLISE DE DESPESAS -->
+        <section id="despesas" class="expenses-section">
+
+            <div class="section-header">
+
+                <div>
+                    <h2>Despesas por categoria</h2>
+                    <p>Veja como seu dinheiro está sendo utilizado.</p>
+                </div>
+
+                <span class="expense-period">Este mês</span>
+
+            </div>
+
+            <div class="expenses-card">
+
+                <div class="expenses-summary">
+                    <span>Total de despesas</span>
+                    <h3>R$ 550,00</h3>
+                    <p>Distribuição dos seus gastos</p>
+                </div>
+
+                <div class="expense-list">
+
+                    <div class="expense-category">
+                        <div class="category-info">
+                            <div class="category-name">
+                                <span class="category-dot food-dot"></span>
+                                <span>Alimentação</span>
+                            </div>
+                            <strong>R$ 220,00</strong>
+                        </div>
+
+                        <div class="progress-track">
+                            <div class="progress-fill food-fill" style="width: 40%;"></div>
+                        </div>
+
+                        <span class="category-percentage">40% dos gastos</span>
+                    </div>
+
+
+                    <div class="expense-category">
+                        <div class="category-info">
+                            <div class="category-name">
+                                <span class="category-dot transport-dot"></span>
+                                <span>Transporte</span>
+                            </div>
+                            <strong>R$ 110,00</strong>
+                        </div>
+
+                        <div class="progress-track">
+                            <div class="progress-fill transport-fill" style="width: 20%;"></div>
+                        </div>
+
+                        <span class="category-percentage">20% dos gastos</span>
+                    </div>
+
+
+                    <div class="expense-category">
+                        <div class="category-info">
+                            <div class="category-name">
+                                <span class="category-dot housing-dot"></span>
+                                <span>Moradia</span>
+                            </div>
+                            <strong>R$ 82,50</strong>
+                        </div>
+
+                        <div class="progress-track">
+                            <div class="progress-fill housing-fill" style="width: 15%;"></div>
+                        </div>
+
+                        <span class="category-percentage">15% dos gastos</span>
+                    </div>
+
+
+                    <div class="expense-category">
+                        <div class="category-info">
+                            <div class="category-name">
+                                <span class="category-dot education-dot"></span>
+                                <span>Educação</span>
+                            </div>
+                            <strong>R$ 82,50</strong>
+                        </div>
+
+                        <div class="progress-track">
+                            <div class="progress-fill education-fill" style="width: 15%;"></div>
+                        </div>
+
+                        <span class="category-percentage">15% dos gastos</span>
+                    </div>
+
+
+                    <div class="expense-category">
+                        <div class="category-info">
+                            <div class="category-name">
+                                <span class="category-dot leisure-dot"></span>
+                                <span>Lazer</span>
+                            </div>
+                            <strong>R$ 55,00</strong>
+                        </div>
+
+                        <div class="progress-track">
+                            <div class="progress-fill leisure-fill" style="width: 10%;"></div>
+                        </div>
+
+                        <span class="category-percentage">10% dos gastos</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- CADASTRO DE MOVIMENTAÇÕES -->
+        <section id="receitas" class="form-section">
+
+            <div class="section-header">
+                <div>
+                    <h2>Nova movimentação</h2>
+                    <p>Registre suas receitas e despesas.</p>
+                </div>
+            </div>
+
+            <form id="transaction-form" class="transaction-form">
+
+                <div class="form-group">
+                    <label for="transaction-type">Tipo de movimentação</label>
+
+                    <select id="transaction-type" required>
+                        <option value="expense">Despesa</option>
+                        <option value="income">Receita</option>
+                    </select>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="transaction-name">Descrição</label>
+
+                    <input
+                        type="text"
+                        id="transaction-name"
+                        placeholder="Ex: Compra no mercado"
+                        required
+                    >
+                </div>
+
+
+                <div class="form-group">
+                    <label for="transaction-category">Categoria</label>
+
+                    <select id="transaction-category" required>
+                        <option value="Alimentação">Alimentação</option>
+                        <option value="Transporte">Transporte</option>
+                        <option value="Moradia">Moradia</option>
+                        <option value="Educação">Educação</option>
+                        <option value="Lazer">Lazer</option>
+                        <option value="Outros">Outros</option>
+                    </select>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="transaction-amount">Valor (R$)</label>
+
+                    <input
+                        type="number"
+                        id="transaction-amount"
+                        placeholder="0,00"
+                        min="0.01"
+                        step="0.01"
+                        required
+                    >
+                </div>
+
+
+                <div class="form-group">
+                    <label for="transaction-date">Data</label>
+
+                    <input
+                        type="date"
+                        id="transaction-date"
+                        required
+                    >
+                </div>
+
+
+                <button type="submit" class="submit-button">
+                    Adicionar movimentação
+                </button>
+
+            </form>
+
+        </section>
+
+
+        <!-- RELATÓRIOS -->
+        <section id="relatorios" class="placeholder-section">
+            <h2>Relatórios</h2>
+            <p>Seus relatórios financeiros aparecerão aqui.</p>
+        </section>
+
+
+        <!-- CONFIGURAÇÕES -->
+        <section id="configuracoes" class="placeholder-section">
+            <h2>Configurações</h2>
+            <p>As configurações da sua conta aparecerão aqui.</p>
+        </section>
+
+    </main>
+
+</div>
 
 <script src="JS/script.js"></script>
 
 </body>
 </html>
-
-
-<!-- RESUMO FINANCEIRO -->
-
-<div class="financial-section">
-
-    
-    <div class="period-filters">
-        <select id="period-month" class="period-select">
-        <option value="all">Todos os meses</option>
-        <option value="01">Janeiro</option>
-        <option value="02">Fevereiro</option>
-        <option value="03">Março</option>
-        <option value="04">Abril</option>
-        <option value="05">Maio</option>
-        <option value="06">Junho</option>
-        <option value="07">Julho</option>
-        <option value="08">Agosto</option>
-        <option value="09">Setembro</option>
-        <option value="10">Outubro</option>
-        <option value="11">Novembro</option>
-        <option value="12">Dezembro</option>
-        </select>
-    
-        <select id="period-year" class="period-select">
-        </select>
-    </div>
-
-
-        <!-- SALDO -->
-
-        <div class="financial-card balance-card">
-
-            <div class="financial-card-header">
-                <span>Saldo disponível</span>
-                <span class="card-icon">R$</span>
-            </div>
-
-            <h3 id="balance-value">R$ 2.450,00</h3>
-
-            <span class="card-description">
-                Seu saldo atual
-            </span>
-
-        </div>
-
-        <!-- RECEITAS -->
-
-        <div class="financial-card">
-
-            <div class="financial-card-header">
-                <span>Receitas</span>
-                <span class="card-icon income-icon">↗</span>
-            </div>
-
-            <h3 id="income-value">R$ 3.000,00</h3>
-
-            <span class="card-description income-text">
-                ↑ Entradas do mês
-            </span>
-
-        </div>
-
-        <!-- DESPESAS -->
-
-        <div class="financial-card">
-
-            <div class="financial-card-header">
-                <span>Despesas</span>
-                <span class="card-icon expense-icon">↙</span>
-            </div>
-            <section id="despesas" class="expenses-section"></section>
-            <h3 id="expense-value">R$ 550,00</h3>
-
-            <span class="card-description expense-text">
-                ↓ Saídas do mês
-            </span>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- TRANSAÇÕES RECENTES -->
-
-<section class="transactions-section">
-
-    <div class="section-header">
-        <div>
-            <h2>Transações recentes</h2>
-            <p>Acompanhe suas últimas movimentações.</p>
-            <section id="transacoes" class="transactions-section"></section>
-        </div>
-
-        <button class="view-all-button">
-            Ver todas →
-        </button>
-    </div>
-
-    <div class="transactions-card">
-
-        <div class="transaction-item">
-            <div class="transaction-info">
-                <div class="transaction-icon food">🍔</div>
-                <div>
-                    <h3>Alimentação</h3>
-                    <span>Restaurante universitário</span>
-                </div>
-            </div>
-
-            <div class="transaction-date">
-                Hoje
-            </div>
-
-            <div class="transaction-value expense">
-                - R$ 35,00
-            </div>
-        </div>
-
-        <div class="transaction-item">
-            <div class="transaction-info">
-                <div class="transaction-icon income">↗</div>
-                <div>
-                    <h3>Bolsa universitária</h3>
-                    <span>Receita</span>
-                </div>
-            </div>
-
-            <div class="transaction-date">
-                14 Nov, 2026
-            </div>
-
-            <div class="transaction-value positive">
-                + R$ 800,00
-            </div>
-        </div>
-
-        <div class="transaction-item">
-            <div class="transaction-info">
-                <div class="transaction-icon transport">🚗</div>
-                <div>
-                    <h3>Transporte</h3>
-                    <span>Aplicativo de transporte</span>
-                </div>
-            </div>
-
-            <div class="transaction-date">
-                13 Nov, 2026
-            </div>
-
-            <div class="transaction-value expense">
-                - R$ 22,50
-            </div>
-        </div>
-
-        <div class="transaction-item">
-            <div class="transaction-info">
-                <div class="transaction-icon education">📚</div>
-                <div>
-                    <h3>Material acadêmico</h3>
-                    <span>Educação</span>
-                </div>
-            </div>
-
-            <div class="transaction-date">
-                12 Nov, 2026
-            </div>
-
-            <div class="transaction-value expense">
-                - R$ 65,00
-            </div>
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ANÁLISE DE DESPESAS -->
-
-<section class="expenses-section">
-
-    <div class="section-header">
-        <div>
-            <h2>Despesas por categoria</h2>
-            <p>Veja como seu dinheiro está sendo utilizado.</p>
-        </div>
-
-        <span class="expense-period">Este mês</span>
-    </div>
-
-    <div class="expenses-card">
-
-        <div class="expenses-summary">
-            <span>Total de despesas</span>
-            <h3>R$ 550,00</h3>
-            <p>Distribuição dos seus gastos</p>
-        </div>
-
-        <div class="expense-list">
-
-            <!-- ALIMENTAÇÃO -->
-            <div class="expense-category">
-
-                <div class="category-info">
-                    <div class="category-name">
-                        <span class="category-dot food-dot"></span>
-                        <span>Alimentação</span>
-                    </div>
-
-                    <strong>R$ 220,00</strong>
-                </div>
-
-                <div class="progress-track">
-                    <div class="progress-fill food-fill"
-                         style="width: 40%;"></div>
-                </div>
-
-                <span class="category-percentage">40% dos gastos</span>
-
-            </div>
-
-            <!-- TRANSPORTE -->
-            <div class="expense-category">
-
-                <div class="category-info">
-                    <div class="category-name">
-                        <span class="category-dot transport-dot"></span>
-                        <span>Transporte</span>
-                    </div>
-
-                    <strong>R$ 110,00</strong>
-                </div>
-
-                <div class="progress-track">
-                    <div class="progress-fill transport-fill"
-                         style="width: 20%;"></div>
-                </div>
-
-                <span class="category-percentage">20% dos gastos</span>
-
-            </div>
-
-            <!-- MORADIA -->
-            <div class="expense-category">
-
-                <div class="category-info">
-                    <div class="category-name">
-                        <span class="category-dot housing-dot"></span>
-                        <span>Moradia</span>
-                    </div>
-
-                    <strong>R$ 82,50</strong>
-                </div>
-
-                <div class="progress-track">
-                    <div class="progress-fill housing-fill"
-                         style="width: 15%;"></div>
-                </div>
-
-                <span class="category-percentage">15% dos gastos</span>
-
-            </div>
-
-            <!-- EDUCAÇÃO -->
-            <div class="expense-category">
-
-                <div class="category-info">
-                    <div class="category-name">
-                        <span class="category-dot education-dot"></span>
-                        <span>Educação</span>
-                    </div>
-
-                    <strong>R$ 82,50</strong>
-                </div>
-
-                <div class="progress-track">
-                    <div class="progress-fill education-fill"
-                         style="width: 15%;"></div>
-                </div>
-
-                <span class="category-percentage">15% dos gastos</span>
-
-            </div>
-
-            <!-- LAZER -->
-            <div class="expense-category">
-
-                <div class="category-info">
-                    <div class="category-name">
-                        <span class="category-dot leisure-dot"></span>
-                        <span>Lazer</span>
-                    </div>
-
-                    <strong>R$ 55,00</strong>
-                </div>
-
-                <div class="progress-track">
-                    <div class="progress-fill leisure-fill"
-                         style="width: 10%;"></div>
-                </div>
-
-                <span class="category-percentage">10% dos gastos</span>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- CADASTRO DE MOVIMENTAÇÕES -->
-
-<section class="form-section">
-
-    <div class="section-header">
-        <div>
-            <h2>Nova movimentação</h2>
-            <p>Registre suas receitas e despesas.</p>
-        </div>
-    </div>
-
-    <form id="transaction-form" class="transaction-form">
-
-        <div class="form-group">
-            <label for="transaction-type">Tipo de movimentação</label>
-
-            <select id="transaction-type" required>
-                <option value="expense">Despesa</option>
-                <option value="income">Receita</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="transaction-name">Descrição</label>
-
-            <input
-                type="text"
-                id="transaction-name"
-                placeholder="Ex: Compra no mercado"
-                required
-            >
-        </div>
-
-        <div class="form-group">
-            <label for="transaction-category">Categoria</label>
-
-            <select id="transaction-category" required>
-                <option value="Alimentação">Alimentação</option>
-                <option value="Transporte">Transporte</option>
-                <option value="Moradia">Moradia</option>
-                <option value="Educação">Educação</option>
-                <option value="Lazer">Lazer</option>
-                <option value="Outros">Outros</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="transaction-amount">Valor (R$)</label>
-
-            <input
-                type="number"
-                id="transaction-amount"
-                placeholder="0,00"
-                min="0.01"
-                step="0.01"
-                required
-            >
-        </div>
-
-        <div class="form-group">
-            <label for="transaction-date">Data</label>
-
-            <input
-                type="date"
-                id="transaction-date"
-                required
-            >
-        </div>
-
-        <button type="submit" class="submit-button">
-            Adicionar movimentação
-        </button>
-
-    </form>
-
-</section>
-
-
-<aside class="sidebar">
-    <div class="logo">
-        <h2>FinControl</h2>
-    </div>
-
-    <nav class="sidebar-nav">
-        <a href="#visao-geral" class="nav-link active">
-            Visão geral
-        </a>
-
-        <a href="#receitas" class="nav-link">
-            Receitas
-        </a>
-
-        <a href="#despesas" class="nav-link">
-            Despesas
-        </a>
-
-        <a href="#transacoes" class="nav-link">
-            Transações
-        </a>
-
-        <a href="#relatorios" class="nav-link">
-            Relatórios
-        </a>
-
-        <a href="#configuracoes" class="nav-link">
-            Configurações
-        </a>
-    </nav>
-</aside>
